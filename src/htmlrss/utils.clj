@@ -2,8 +2,9 @@
 
 
 (defn convert-date-format [from to date]
-  (.format
+  (try (.format
    (java.text.SimpleDateFormat. to)
    (.parse
     (java.text.SimpleDateFormat. from)
-    date)))
+    date))
+  (catch Exception e (str from " -> " to " (" date "): " (.getMessage e)))))

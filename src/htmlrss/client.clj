@@ -1,7 +1,8 @@
 (ns htmlrss.client
   (:require [clj-http.client :as client]
             [hickory.select :as s]
-            [hickory.core :as hic]))
+            [hickory.core :as hic]
+            [clojure.string :as str]))
 
 
 (defn fetch-html [url]
@@ -23,11 +24,11 @@
         link (->> link-element
                   :attrs
                   :href
-                  trim)
+                  str/trim)
         title (->> link-element
                    :content
                    first
-                   trim)]
+                   str/trim)]
     {:title title :date date :link link}))
 
 

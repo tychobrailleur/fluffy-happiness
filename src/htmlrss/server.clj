@@ -10,12 +10,15 @@
   (element :item {}
            (element :title {} (entry :title))
            (element :link {} (str url (entry :link)))
-           (element :pubDate {} (utils/convert-date-format (entry :date) "YYYY MMM dd" "E, dd MMM YYYY 08:00:00 GMT"))
+           (element :pubDate {} (utils/convert-date-format
+                                 "yyyy MMM dd"
+                                 "E, dd MMM yyyy 08:00:00 'GMT'"
+                                 (entry :date)))
            (element :guid {} (str url (entry :link)))))
 
 
 (defn create-xml-response [items conf]
-  (let [xml-items (map #(entry->xml % (conf :link)) items)]
+  (let [xml-items (map #(entry->xml % (conf :url)) items)]
     (emit-str
      (element :rss {:version "2.0"}
               (element :channel {}
@@ -33,7 +36,11 @@
             items (client/post-titles content feed)]
         {:status 200
          :headers {"Content-Type" "text/xml"}
-         :body (create-xml-response items conf)}))))
+         :body (create-xml-response items feed)})
+      (if (= path "/")
+        {:status 200
+         :headers {"Content-Type" "text/html"}
+         :body "<html>ok</html>"}))))
 
 (defn start-server [conf]
   (println "Starting server on port" (conf :port) "...")
