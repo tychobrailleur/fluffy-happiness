@@ -1,0 +1,13 @@
+* htmlrss
+
+A Clojure library designed to ... well, that part is up to you.
+
+** Usage
+
+FIXME
+
+** License
+
+Copyright © 2021 Sébastien Le Callonnec
+
+This project is licensed under the GNU General Public License v3.0.
