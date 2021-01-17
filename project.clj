@@ -11,5 +11,9 @@
                  [clj-http "3.10.3"]
                  [hickory "0.7.1"]
                  [ring "1.8.2"]]
+  :profiles
+  {:uberjar {:omit-source true
+             :env {:production true}
+             :aot :all}}
   :repl-options {:init-ns htmlrss.core}
   :main htmlrss.core)

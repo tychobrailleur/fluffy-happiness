@@ -1,0 +1,4 @@
+{:port 8080
+ :feeds {:vitalik {:title "Vitalik Buterin's website"
+                   :url "https://vitalik.ca/"
+                   :lang "en-us"}}}
