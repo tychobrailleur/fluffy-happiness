@@ -35,7 +35,7 @@
       (let [content (client/fetch-html (feed :url))
             items (client/post-titles content feed)]
         {:status 200
-         :headers {"Content-Type" "text/xml"}
+         :headers {"Content-Type" "application/rss+xml"}
          :body (create-xml-response items feed)})
       (if (= path "/")
         {:status 200
